@@ -16,7 +16,7 @@
                 <h1 class="text-5xl font-black">To-Do List</h1>
                 <form>
                     <fieldset id="add">
-                        <legend class="m-1 pb-1 text-xs">할 일 추가</legend>
+                        <legend class="py-3 text-xs">할 일 추가</legend>
                         <div class="flex flex-row gap-3 max-sm:flex-col">
                             <input
                                 type="text"
@@ -40,11 +40,17 @@
                         </div>
                     </fieldset>
                 </form>
-                <p class="m-1 self-start text-xs">할 일 목록</p>
+                <p class="m-1 self-start py-3 text-xs">할 일 목록</p>
                 <ol
-                    class="flex w-full list-inside list-decimal flex-col gap-1"
+                    class="flex w-full list-inside list-decimal flex-col gap-5"
                     id="to-do-list"
                 >
+                    <li
+                        class="flex flex-row justify-between rounded border p-3"
+                    >
+                        <div>치킨 먹기</div>
+                        <div>2026-05-15</div>
+                    </li>
                     <li
                         class="flex flex-row justify-between rounded border p-3"
                     >
