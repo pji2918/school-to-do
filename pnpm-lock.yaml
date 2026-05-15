@@ -34,13 +34,13 @@ importers:
         specifier: ^2.7.0
         version: 2.7.0
       prettier:
-        specifier: 3.8.3
+        specifier: ^3.8.3
         version: 3.8.3
       prettier-plugin-tailwindcss:
         specifier: ^0.8.0
         version: 0.8.0(prettier@3.8.3)
       typescript:
-        specifier: ~6.0.2
+        specifier: ^6.0.3
         version: 6.0.3
       typescript-eslint:
         specifier: ^8.59.3
