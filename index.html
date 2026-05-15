@@ -8,59 +8,77 @@
         <link rel="stylesheet" href="./css/index.css" />
     </head>
     <body>
-        <div id="app" class="flex h-dvh items-start justify-center p-10">
+        <noscript>
+            JavaScript가 비활성화되었습니다. 페이지의 기능이 작동하지 않을
+            것입니다.
+        </noscript>
+        <template id="to-do-elements">
+            <li
+                class="flex flex-row items-center justify-between rounded border p-3"
+            >
+                <div class="todo-field-todo">치킨 먹기</div>
+                <div class="flex flex-row items-center justify-center gap-3">
+                    <div class="todo-field-due">2026-05-15</div>
+                    <button
+                        class="rounded-md bg-green-300 p-1 px-2 hover:cursor-pointer"
+                    >
+                        완료
+                    </button>
+                    <button
+                        class="rounded-md bg-red-300 p-1 px-2 hover:cursor-pointer"
+                    >
+                        삭제
+                    </button>
+                </div>
+            </li>
+        </template>
+        <template id="to-do-empty-placeholder">
+            <div class="text-center text-gray-400">할 일 없음</div>
+        </template>
+
+        <div
+            `id="app"
+            class="flex h-dvh items-start justify-center p-10 noscript:hidden"
+        >
             <main
                 id="main-area"
                 class="flex flex-col items-center justify-start gap-1 rounded-2xl border p-10"
             >
                 <h1 class="text-5xl font-black">To-Do List</h1>
-                <form>
+                <form id="todo-add-form">
                     <fieldset id="add">
                         <legend class="py-3 text-xs">할 일 추가</legend>
                         <div class="flex flex-row gap-3 max-sm:flex-col">
                             <input
                                 type="text"
-                                class="rounded-lg border p-1"
+                                class="rounded-md border p-2"
                                 placeholder="할 일 입력..."
                                 required
                                 id="add-todo"
                             />
                             <input
                                 type="datetime-local"
-                                class="rounded-lg border p-1"
+                                class="rounded-md border p-2"
                                 id="add-due-date"
+                                min=""
                             />
                             <button
                                 type="submit"
                                 id="add-button"
-                                class="rounded-xl bg-purple-400 p-2 hover:cursor-pointer"
+                                class="rounded-md bg-purple-400 hover:cursor-pointer max-sm:p-3 sm:px-3"
                             >
                                 추가
                             </button>
                         </div>
                     </fieldset>
                 </form>
-                <p class="m-1 self-start py-3 text-xs">할 일 목록</p>
+                <p class="self-start py-3 text-xs">할 일 목록</p>
                 <ol
                     class="flex w-full list-inside list-decimal flex-col gap-5"
                     id="to-do-list"
-                >
-                    <li
-                        class="flex flex-row justify-between rounded border p-3"
-                    >
-                        <div>치킨 먹기</div>
-                        <div>2026-05-15</div>
-                    </li>
-                    <li
-                        class="flex flex-row justify-between rounded border p-3"
-                    >
-                        <div>치킨 먹기</div>
-                        <div>2026-05-15</div>
-                    </li>
-                </ol>
+                ></ol>
             </main>
         </div>
-
         <script type="module" src="./src/index.ts"></script>
     </body>
 </html>

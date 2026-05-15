@@ -9,10 +9,17 @@ export default defineConfig([
     {
         files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
         plugins: { js },
-        extends: ["js/recommended"],
-        languageOptions: { globals: globals.browser },
+        extends: [js.configs.recommended, tseslint.configs.strictTypeChecked],
+        languageOptions: {
+            globals: globals.browser,
+            parserOptions: {
+                projectService: true,
+            },
+        },
+        rules: {
+            "@typescript-eslint/no-unused-vars": "warn",
+        },
     },
-    tseslint.configs.recommended,
     {
         files: ["**/*.css"],
         plugins: { css },
