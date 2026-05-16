@@ -5,7 +5,7 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>To-Do</title>
-        <link rel="stylesheet" href="./css/index.css" />
+        <link rel="stylesheet" href="./src/style.css" />
     </head>
     <body class="dark:bg-black dark:text-slate-200">
         <noscript>
@@ -16,16 +16,14 @@
             <li
                 class="flex flex-row items-center justify-between rounded border p-3 dark:border-zinc-800"
             >
-                <div class="todo-field-todo">치킨 먹기</div>
+                <div class="flex flex-row items-center justify-center gap-3">
+                    <input type="checkbox" />
+                    <div class="todo-field-todo">치킨 먹기</div>
+                </div>
                 <div class="flex flex-row items-center justify-center gap-3">
                     <div class="todo-field-due">2026-05-15</div>
                     <button
-                        class="rounded-md bg-green-300 p-1 px-2 hover:cursor-pointer"
-                    >
-                        완료
-                    </button>
-                    <button
-                        class="rounded-md bg-red-300 p-1 px-2 hover:cursor-pointer"
+                        class="delete-btn rounded-md bg-red-300 p-1 px-2 hover:cursor-pointer"
                     >
                         삭제
                     </button>
@@ -38,13 +36,10 @@
             </div>
         </template>
 
-        <div
-            `id="app"
-            class="flex h-dvh items-start justify-center p-10 noscript:hidden"
-        >
+        <div `id="app" class="flex h-dvh items-start justify-center p-10">
             <main
                 id="main-area"
-                class="flex flex-col items-center justify-start gap-1 rounded-2xl border bg-zinc-900 p-10 dark:border-zinc-800"
+                class="flex flex-col items-center justify-start gap-1 rounded-2xl border p-10 dark:border-zinc-800 dark:bg-zinc-900"
             >
                 <h1 class="text-5xl font-black">To-Do List</h1>
                 <form id="todo-add-form">

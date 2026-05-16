@@ -1,6 +1,8 @@
 type ToDo = {
+    id: string;
     todo: string;
     due?: Temporal.PlainDateTime;
+    completed: boolean;
 };
 const localData = localStorage.getItem("to-do");
 const toDoList: ToDo[] = localData ? (JSON.parse(localData) as ToDo[]) : [];
@@ -44,12 +46,29 @@ function renderList(): void {
         toDoListElement.replaceChildren();
         toDoList.forEach((item) => {
             const clone = document.importNode(toDoTemplate.content, true);
-            const todoField = clone.querySelector(".todo-field-todo");
-            const dueField = clone.querySelector(".todo-field-due");
+            const todoField = clone.querySelector(
+                ".todo-field-todo",
+            ) as HTMLDivElement;
+            const dueField = clone.querySelector(
+                ".todo-field-due",
+            ) as HTMLDivElement;
+            const deleteButton = clone.querySelector(
+                ".delete-btn",
+            ) as HTMLButtonElement;
+            const toDoListItem = clone.querySelector("li") as HTMLLIElement;
+            const toDoCompCheckbox = clone.querySelector(
+                "input",
+            ) as HTMLInputElement;
 
-            if (!(todoField && dueField)) {
-                throw new Error("Template is invalid");
-            }
+            toDoListItem.id = item.id;
+            toDoCompCheckbox.checked = item.completed;
+            deleteButton.addEventListener("click", () => {
+                deleteToDo(item.id);
+            });
+            toDoCompCheckbox.addEventListener("change", (event) => {
+                const target = event.target as HTMLInputElement;
+                completeToDo(item.id, target.checked);
+            });
 
             todoField.textContent = item.todo;
             dueField.textContent =
@@ -61,10 +80,13 @@ function renderList(): void {
                     minute: "2-digit",
                 }) ?? "";
 
+            if (item.completed) {
+                todoField.classList.add("text-gray-400", "line-through");
+            }
+
             toDoListElement.appendChild(clone);
         });
     }
-    console.log(toDoList);
 }
 
 /**
@@ -76,16 +98,37 @@ function addToDo(): void {
     const formData = new FormData(toDoAddForm);
     if (formData.get("add-due-date")) {
         toDoList.push({
+            id: crypto.randomUUID(),
             todo: formData.get("add-todo") as string,
             due: Temporal.PlainDateTime.from(
                 formData.get("add-due-date") as string,
             ),
+            completed: false,
         });
     } else {
         toDoList.push({
+            id: crypto.randomUUID(),
             todo: formData.get("add-todo") as string,
+            completed: false,
         });
     }
+    save();
+    renderList();
+}
+
+/**
+ * 할 일 목록에서 요소를 삭제합니다.
+ * @param id UUID
+ */
+function deleteToDo(id: string): void {
+    toDoList.splice(toDoList.findIndex((element) => element.id === id));
+    save();
+    renderList();
+}
+
+function completeToDo(id: string, checked: boolean): void {
+    toDoList[toDoList.findIndex((element) => element.id === id)].completed =
+        checked;
     save();
     renderList();
 }
@@ -93,5 +136,8 @@ function addToDo(): void {
 const currentTime = Temporal.Now.plainDateTimeISO();
 (toDoAddForm.querySelector("#add-due-date") as HTMLInputElement).min =
     plainDateTimeToString(currentTime);
-toDoAddForm.onsubmit = addToDo;
+toDoAddForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    addToDo();
+});
 renderList();
