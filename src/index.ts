@@ -129,11 +129,29 @@ function deleteToDo(id: string): void {
     renderList();
 }
 
+/**
+ * 할 일의 완료/미완료를 전환합니다.
+ * @param id 변경할 할 일의 UUID
+ * @param checked 체크박스의 true/false.
+ */
 function completeToDo(id: string, checked: boolean): void {
     toDoList[toDoList.findIndex((element) => element.id === id)].completed =
         checked;
     save();
     renderList();
+}
+
+/**
+ * 할 일 목록을 정렬합니다.
+ *
+ * 정렬 기준은 완료 우선 -> 이름 순입니다.
+ */
+function sortToDoList(): void {
+    toDoList.sort(
+        (a, b) =>
+            Number(b.completed) - Number(a.completed) ||
+            a.todo.localeCompare(b.todo),
+    );
 }
 
 const currentTime = Temporal.Now.plainDateTimeISO();
@@ -143,4 +161,5 @@ toDoAddForm.addEventListener("submit", (event) => {
     event.preventDefault();
     addToDo();
 });
+sortToDoList();
 renderList();
