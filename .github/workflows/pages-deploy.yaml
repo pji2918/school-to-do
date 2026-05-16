@@ -28,7 +28,7 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
       - name: Install pnpm
-        uses: pnpm/action-setup
+        uses: pnpm/action-setup@v6
         with:
           cache: true
       - name: Set up Node
