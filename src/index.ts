@@ -121,7 +121,10 @@ function addToDo(): void {
  * @param id UUID
  */
 function deleteToDo(id: string): void {
-    toDoList.splice(toDoList.findIndex((element) => element.id === id));
+    toDoList.splice(
+        toDoList.findIndex((element) => element.id === id),
+        1,
+    );
     save();
     renderList();
 }
