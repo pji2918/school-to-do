@@ -16,6 +16,9 @@ const toDoPlaceholder = document.querySelector(
     "#to-do-empty-placeholder",
 ) as HTMLTemplateElement;
 const toDoAddForm = document.querySelector("#todo-add-form") as HTMLFormElement;
+const todoEditDialog = document.querySelector(
+    "#to-do-edit",
+) as HTMLDialogElement;
 
 /**
  * toDoList 리스트를 Local Storage에 저장합니다.
@@ -55,6 +58,9 @@ function renderList(): void {
             const deleteButton = clone.querySelector(
                 ".delete-btn",
             ) as HTMLButtonElement;
+            const editButton = clone.querySelector(
+                ".edit-btn",
+            ) as HTMLButtonElement;
             const toDoListItem = clone.querySelector("li") as HTMLLIElement;
             const toDoCompCheckbox = clone.querySelector(
                 "input",
@@ -65,25 +71,41 @@ function renderList(): void {
             deleteButton.addEventListener("click", () => {
                 deleteToDo(item.id);
             });
+            editButton.addEventListener("click", (event) => {
+                event.preventDefault();
+                editToDo(item.id);
+            });
             toDoCompCheckbox.addEventListener("change", (event) => {
                 const target = event.target as HTMLInputElement;
                 completeToDo(item.id, target.checked);
             });
 
             todoField.textContent = item.todo;
-            dueField.textContent =
-                item.due?.toLocaleString("ko-KR", {
+
+            if (item.due) {
+                item.due = Temporal.PlainDateTime.from(item.due);
+                dueField.textContent = item.due.toLocaleString("ko-KR", {
                     hour12: true,
+                    year: "numeric",
                     month: "2-digit",
                     day: "2-digit",
                     hour: "2-digit",
                     minute: "2-digit",
-                }) ?? "";
+                });
+            }
 
             if (item.completed) {
                 todoField.classList.add("text-gray-400", "line-through");
+            } else if (
+                item.due &&
+                Temporal.PlainDateTime.compare(
+                    item.due,
+                    Temporal.Now.plainDateTimeISO(),
+                ) <= 0
+            ) {
+                todoField.textContent = `!! ${todoField.textContent}`;
+                todoField.classList.add("text-red-700");
             }
-
             toDoListElement.appendChild(clone);
         });
     }
@@ -144,19 +166,73 @@ function completeToDo(id: string, checked: boolean): void {
 /**
  * 할 일 목록을 정렬합니다.
  *
- * 정렬 기준은 완료 우선 -> 이름 순입니다.
+ * 정렬 기준은 완료 여부 -> 이름 순입니다.
  */
 function sortToDoList(): void {
-    toDoList.sort(
-        (a, b) =>
-            Number(b.completed) - Number(a.completed) ||
-            a.todo.localeCompare(b.todo),
-    );
+    toDoList.sort((a, b) => {
+        if (a.due && b.due) {
+            return (
+                Number(b.completed) - Number(a.completed) ||
+                Temporal.PlainDateTime.compare(a.due, b.due) ||
+                a.todo.localeCompare(b.todo)
+            );
+        } else {
+            return (
+                Number(b.completed) - Number(a.completed) ||
+                a.todo.localeCompare(b.todo)
+            );
+        }
+    });
+}
+
+function editToDo(id: string): void {
+    const idx = toDoList.findIndex((obj) => obj.id === id);
+
+    const todoEditForm = todoEditDialog.querySelector(
+        "form",
+    ) as HTMLFormElement;
+    const cancelBtn = todoEditDialog.querySelector(
+        "#to-do-edit-cancel",
+    ) as HTMLButtonElement;
+    const nameField = todoEditForm.querySelector(
+        "#to-do-edit-name",
+    ) as HTMLInputElement;
+    const dueField = todoEditForm.querySelector(
+        "#to-do-edit-due",
+    ) as HTMLInputElement;
+
+    cancelBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        todoEditForm.reset();
+        todoEditDialog.close();
+    });
+    nameField.value = toDoList[idx].todo;
+    if (toDoList[idx].due) {
+        dueField.value = plainDateTimeToString(toDoList[idx].due);
+    }
+
+    todoEditDialog.showModal();
+    todoEditForm.addEventListener("submit", () => {
+        const formData = new FormData(todoEditForm);
+        if (formData.get("to-do-edit-name")) {
+            toDoList[idx].todo = formData.get("to-do-edit-name") as string;
+        }
+        if (formData.get("to-do-edit-due")) {
+            toDoList[idx].due = Temporal.PlainDateTime.from(
+                formData.get("to-do-edit-due") as string,
+            );
+        } else {
+            toDoList[idx].due = undefined;
+        }
+
+        save();
+        renderList();
+    });
 }
 
 const currentTime = Temporal.Now.plainDateTimeISO();
-(toDoAddForm.querySelector("#add-due-date") as HTMLInputElement).min =
-    plainDateTimeToString(currentTime);
+// (toDoAddForm.querySelector("#add-due-date") as HTMLInputElement).min =
+//     plainDateTimeToString(currentTime);
 toDoAddForm.addEventListener("submit", (event) => {
     event.preventDefault();
     addToDo();

@@ -23,6 +23,11 @@
                 <div class="flex flex-row items-center justify-center gap-3">
                     <div class="todo-field-due">2026-05-15</div>
                     <button
+                        class="edit-btn rounded-md bg-purple-300 p-1 px-2 hover:cursor-pointer"
+                    >
+                        수정
+                    </button>
+                    <button
                         class="delete-btn rounded-md bg-red-300 p-1 px-2 hover:cursor-pointer"
                     >
                         삭제
@@ -36,7 +41,57 @@
             </div>
         </template>
 
-        <div `id="app" class="flex h-dvh items-start justify-center p-10">
+        <dialog id="to-do-edit">
+            <div
+                class="fixed flex h-full w-full items-center justify-center bg-black/50 backdrop-blur"
+            >
+                <div
+                    class="min-h-30 min-w-10 gap-3 rounded-2xl border bg-white p-10"
+                >
+                    <form
+                        id="to-do-edit-form"
+                        method="dialog"
+                        class="flex flex-col items-center justify-between gap-5"
+                    >
+                        <h1 class="text-4xl font-bold">할 일 수정하기</h1>
+                        <div class="flex flex-row gap-3">
+                            <input
+                                name="to-do-edit-name"
+                                id="to-do-edit-name"
+                                type="text"
+                                class="rounded-md border p-2 outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-slate-200"
+                                placeholder="할 일 입력..."
+                            />
+                            <input
+                                name="to-do-edit-due"
+                                id="to-do-edit-due"
+                                class="rounded-md border p-2 outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-slate-200"
+                                type="datetime-local"
+                            />
+                        </div>
+                        <div class="flex flex-row gap-3">
+                            <button
+                                type="submit"
+                                id="to-do-edit-submit"
+                                class="rounded-md bg-gray-800 p-2 px-10 text-white transition-colors hover:cursor-pointer hover:bg-gray-600"
+                            >
+                                저장
+                            </button>
+                            <button
+                                type="reset"
+                                value="cancel"
+                                id="to-do-edit-cancel"
+                                class="rounded-md border border-slate-300 bg-white p-2 px-10 transition-colors hover:cursor-pointer hover:bg-gray-200"
+                            >
+                                취소
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
+        <div id="app" class="flex h-dvh items-start justify-center p-10">
             <main
                 id="main-area"
                 class="flex flex-col items-center justify-start gap-1 rounded-2xl border p-10 dark:border-zinc-800 dark:bg-zinc-900"
@@ -64,7 +119,7 @@
                             <button
                                 type="submit"
                                 id="add-button"
-                                class="rounded-md bg-purple-400 hover:cursor-pointer max-sm:p-3 sm:px-3 dark:bg-violet-600"
+                                class="rounded-md bg-purple-600 text-white hover:cursor-pointer max-sm:p-3 sm:px-3 dark:bg-violet-400"
                             >
                                 추가
                             </button>
