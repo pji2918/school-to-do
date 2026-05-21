@@ -231,8 +231,8 @@ function editToDo(id: string): void {
 }
 
 const currentTime = Temporal.Now.plainDateTimeISO();
-// (toDoAddForm.querySelector("#add-due-date") as HTMLInputElement).min =
-//     plainDateTimeToString(currentTime);
+(toDoAddForm.querySelector("#add-due-date") as HTMLInputElement).min =
+    plainDateTimeToString(currentTime);
 toDoAddForm.addEventListener("submit", (event) => {
     event.preventDefault();
     addToDo();
