@@ -5,22 +5,7 @@
 학교 과제로 만든 To-Do 프로젝트입니다. 이 저장소는 일정, 과제, 할 일 관리를 더 빠르고 편리하게 만들기 위한 웹 애플리케이션의 소스 코드를 담고 있습니다.
 
 ## 기능 소개
-
-<table style="text-align: center;">
-	<tr>
-		<td>
-			<video controls width="30%" loop muted autoplay>
-				<source src="./docs/videos/demonstration.mp4" type="video/mp4">
-				브라우저가 video 태그를 지원하지 않습니다.
-			</video>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<p>시연 영상</p>
-		</td>
-	</tr>
-</table>
+https://github.com/user-attachments/assets/712785a1-d69a-4485-a59f-28707d55927c
 
 ## 빌드 방법
 
