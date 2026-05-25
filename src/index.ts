@@ -83,8 +83,9 @@ function renderList(): void {
             todoField.textContent = item.todo;
 
             if (item.due) {
-                item.due = Temporal.PlainDateTime.from(item.due);
-                dueField.textContent = item.due.toLocaleString("ko-KR", {
+                dueField.textContent = Temporal.PlainDateTime.from(
+                    item.due,
+                ).toLocaleString("ko-KR", {
                     hour12: true,
                     year: "numeric",
                     month: "2-digit",
@@ -92,6 +93,8 @@ function renderList(): void {
                     hour: "2-digit",
                     minute: "2-digit",
                 });
+            } else {
+                dueField.remove();
             }
 
             if (item.completed) {
