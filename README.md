@@ -6,60 +6,21 @@
 
 ## 기능 소개
 
-아래 영상은 레이아웃 테스트용 예시입니다. 실제 프로젝트 영상으로 교체해서 사용하세요.
-
-<table>
+<table style="text-align: center;">
 	<tr>
 		<td>
-			<video controls width="100%">
-				<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-				브라우저가 video 태그를 지원하지 않습니다.
-			</video>
-		</td>
-		<td>
-			<video controls width="100%">
-				<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+			<video controls width="30%" loop muted autoplay>
+				<source src="./docs/videos/demonstration.mp4" type="video/mp4">
 				브라우저가 video 태그를 지원하지 않습니다.
 			</video>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<p>시연 영상 1</p>
-			<p>간략한 설명을 입력하세요.</p>
-		</td>
-		<td>
-			<p>시연 영상 2</p>
-			<p>간략한 설명을 입력하세요.</p>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<video controls width="100%">
-				<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-				브라우저가 video 태그를 지원하지 않습니다.
-			</video>
-		</td>
-		<td>
-			<video controls width="100%">
-				<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-				브라우저가 video 태그를 지원하지 않습니다.
-			</video>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<p>시연 영상 3</p>
-			<p>간략한 설명을 입력하세요.</p>
-		</td>
-		<td>
-			<p>시연 영상 4</p>
-			<p>간략한 설명을 입력하세요.</p>
+			<p>시연 영상</p>
 		</td>
 	</tr>
 </table>
-
-> 필요에 따라 3개만 사용해도 되고, 남는 칸은 스크린샷이나 추가 설명으로 채워도 됩니다.
 
 ## 빌드 방법
 
