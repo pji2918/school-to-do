@@ -189,6 +189,10 @@ function sortToDoList(): void {
     });
 }
 
+/**
+ * 할 일 항목의 요소를 수정합니다.
+ * @param id UUID 형식의 할 일 ID.
+ */
 function editToDo(id: string): void {
     const todoEditForm = todoEditDialog.querySelector(
         "form",
