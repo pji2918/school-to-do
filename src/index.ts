@@ -108,6 +108,7 @@ function renderList(): void {
             ) {
                 todoField.textContent = `!! ${todoField.textContent}`;
                 todoField.classList.add("text-red-700");
+                todoField.classList.add("dark:text-red-500");
             }
             toDoListElement.appendChild(clone);
         });
