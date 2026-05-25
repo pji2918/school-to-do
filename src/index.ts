@@ -137,6 +137,7 @@ function addToDo(): void {
             completed: false,
         });
     }
+    sortToDoList();
     save();
     renderList();
 }
@@ -189,8 +190,6 @@ function sortToDoList(): void {
 }
 
 function editToDo(id: string): void {
-    const idx = toDoList.findIndex((obj) => obj.id === id);
-
     const todoEditForm = todoEditDialog.querySelector(
         "form",
     ) as HTMLFormElement;
@@ -204,18 +203,33 @@ function editToDo(id: string): void {
         "#to-do-edit-due",
     ) as HTMLInputElement;
 
-    cancelBtn.addEventListener("click", (event) => {
+    const selectedToDo = toDoList.find((obj) => obj.id === id);
+    if (!selectedToDo) {
+        return;
+    }
+
+    cancelBtn.onclick = (event) => {
         event.preventDefault();
         todoEditForm.reset();
         todoEditDialog.close();
-    });
-    nameField.value = toDoList[idx].todo;
-    if (toDoList[idx].due) {
-        dueField.value = plainDateTimeToString(toDoList[idx].due);
+    };
+    nameField.value = selectedToDo.todo;
+    if (selectedToDo.due) {
+        dueField.value = plainDateTimeToString(selectedToDo.due);
+    } else {
+        dueField.value = "";
     }
 
     todoEditDialog.showModal();
-    todoEditForm.addEventListener("submit", () => {
+    todoEditForm.onsubmit = (event) => {
+        event.preventDefault();
+        const idx = toDoList.findIndex((obj) => obj.id === id);
+        if (idx < 0) {
+            todoEditForm.reset();
+            todoEditDialog.close();
+            return;
+        }
+
         const formData = new FormData(todoEditForm);
         if (formData.get("to-do-edit-name")) {
             toDoList[idx].todo = formData.get("to-do-edit-name") as string;
@@ -228,9 +242,12 @@ function editToDo(id: string): void {
             toDoList[idx].due = undefined;
         }
 
+        sortToDoList();
         save();
         renderList();
-    });
+        todoEditForm.reset();
+        todoEditDialog.close();
+    };
 }
 
 const currentTime = Temporal.Now.plainDateTimeISO();
