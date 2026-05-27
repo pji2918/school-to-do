@@ -177,13 +177,17 @@ function sortToDoList(): void {
     toDoList.sort((a, b) => {
         if (a.due && b.due) {
             return (
-                Number(b.completed) - Number(a.completed) ||
+                Number(a.completed) - Number(b.completed) ||
                 Temporal.PlainDateTime.compare(a.due, b.due) ||
                 a.todo.localeCompare(b.todo)
             );
+        } else if (a.due) {
+            return -1;
+        } else if (b.due) {
+            return 1;
         } else {
             return (
-                Number(b.completed) - Number(a.completed) ||
+                Number(a.completed) - Number(b.completed) ||
                 a.todo.localeCompare(b.todo)
             );
         }
