@@ -6,7 +6,7 @@
 
 ### 기능 소개
 
-https://github.com/user-attachments/assets/712785a1-d69a-4485-a59f-28707d55927c
+https://github.com/user-attachments/assets/f4ddf36c-0714-454c-8ba6-fd57a0d254ee
 
 ### 사용된 기술
 
