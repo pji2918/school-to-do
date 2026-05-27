@@ -14,6 +14,7 @@ https://github.com/user-attachments/assets/712785a1-d69a-4485-a59f-28707d55927c
 - [JSON](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/JSON): 오브젝트 직렬화
 - [LocalStorage](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage): 오브젝트 저장
 - [TypeScript](https://www.typescriptlang.org/): 자료형 관련 편의 기능 제공
+- [Tailwind CSS](https://tailwindcss.com/): CSS 스타일 간소화
 - [Vite](https://vite.dev/): 번들링
 
 ## 빌드 방법

@@ -28,6 +28,7 @@
 > 여기에서는 fnm을 사용하겠습니다.
 
 [여기](https://github.com/Schniz/fnm)에 있는 지침에 따라 fnm을 설치하신 다음, 아래 명령어를 입력해서 Node.js 26 버전을 설치합니다.
+
 ```bash
 fnm install --use
 ```
@@ -36,24 +37,25 @@ fnm install --use
 
 1. [https://nodejs.org/ko/download](https://nodejs.org/ko/download)로 이동합니다.
 2. Node.js 버전을 24(LTS)에서 26(Current)로 변경합니다.
-<table style="text-align: center;">
-    <tr>
-        <td><img src="./imgs/nodejsversion24.webp" width=300 /></td>
-        <td><img src="./imgs/nodejsversion26.webp" width=300 /></td>
-    </tr>
-    <tr>
-        <td>잘못된 예</td>
-        <td>옳은 예</td>
-    </tr>
-</table>
+ <table style="text-align: center;">
+     <tr>
+         <td><img src="./imgs/nodejsversion24.webp" width=300 /></td>
+         <td><img src="./imgs/nodejsversion26.webp" width=300 /></td>
+     </tr>
+     <tr>
+         <td>잘못된 예</td>
+         <td>옳은 예</td>
+     </tr>
+ </table>
 3. Node.js를 설치합니다. 페이지의 지시에 따르시면 됩니다.
 
 ### pnpm 설치하기
 
 > [!NOTE]
-> pnpm이 이미 설치되어 있으시다면 이 단계는 건너뛰어도 무방합니다.
+> pnpm이 이미 설치되어 있으시다면 이 단계는 건너뛰셔도 됩니다.
 
 다음 명령어를 입력합니다.
+
 ```bash
 npm install -g corepack
 corepack install
@@ -61,6 +63,7 @@ corepack enable
 ```
 
 ## 빌드하기
+
 다음 명령어를 순서대로 입력합니다.
 
 ```bash
