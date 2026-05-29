@@ -38,9 +38,11 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm ci
-      - name: Run linter
+      - name: Run ESLint
         run: pnpm lint
-      - name: Build
+      - name: Run TypeScript type checks
+        run: pnpm exec tsc --noEmit
+      - name: Run build
         run: pnpm run build
       - name: Setup Pages
         uses: actions/configure-pages@v6
