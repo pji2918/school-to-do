@@ -152,6 +152,7 @@ function deleteToDo(id: string): void {
         toDoList.findIndex((element) => element.id === id),
         1,
     );
+    sortToDoList();
     save();
     renderList();
 }
@@ -164,6 +165,7 @@ function deleteToDo(id: string): void {
 function completeToDo(id: string, checked: boolean): void {
     toDoList[toDoList.findIndex((element) => element.id === id)].completed =
         checked;
+    sortToDoList();
     save();
     renderList();
 }
